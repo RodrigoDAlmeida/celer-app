@@ -31,7 +31,7 @@
   },
   "include": [
     "src"
-  ],
+, "i18n.js", "i18n.js"  ],
   "exclude": [
     "node_modules"
   ]

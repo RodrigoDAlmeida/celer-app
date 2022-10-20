@@ -31,13 +31,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 // ** Global css styles
 import '../../styles/globals.css'
 
-import React from 'react'
-import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
-import LanguageDetector from 'i18next-browser-languagedetector';
-import HttpApi from 'i18next-http-backend'
-
-
+//Interlalization
+import useTranslation from 'next-translate/useTranslation'
 
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
@@ -60,30 +55,10 @@ if (themeConfig.routingLoader) {
   })
 }
 
-i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .use(LanguageDetector)
-  .use(HttpApi)
-  .init({
-  
-    supportedLngs: ['en', 'pt'],
-    fallbackLng: "en",
-    react: { useSuspense: false},
-    detection : {
-      order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],
-      caches: ['cookie']
-    },
-    backend: {
-      loadPath: '/assets/locales/{{lng}}/translation.json'
-    }
-    
-  });
-
-
 // ** Configure JSS & ClassName
 const App = (props: ExtendedAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)

@@ -3,7 +3,7 @@ import { useState, SyntheticEvent, Fragment } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
-import i18next from 'i18next'
+import setLanguage from 'next-translate/setLanguage'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -66,7 +66,7 @@ const languages = [
 
   function selectLanguage(code:string){
 
-    i18next.changeLanguage(code)
+    setLanguage(code)
     handleDropdownClose();
   }
 

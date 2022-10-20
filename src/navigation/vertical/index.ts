@@ -10,13 +10,13 @@ import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 
-import { useTranslation } from 'react-i18next'
+import useTranslation from 'next-translate/useTranslation'
 
 // ** Type import
 import { VerticalNavItemsType } from 'src/@core/layouts/types'
 
 const navigation = (): VerticalNavItemsType => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('common');
   return [
     {
       title: t('dashboard'),
