@@ -1,5 +1,12 @@
 {
     "celer-description": "Order and Product Management",
     "dashboard": "Dashboard",
-    "account_settings": "Account Settings"
+    "account_settings": "Account Settings",
+    "name": "Name",
+    "submit": "Submit",
+
+    "company_abbreviation": "Abbreviation",
+    "company_name_example": "Microsoft",
+    "company_email_example": "sales@microsoft.com",
+    "company_form_title": "Add new Company"
 }

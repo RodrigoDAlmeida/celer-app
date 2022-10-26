@@ -86,7 +86,8 @@ const languages = [
         {languages.map(({code, name, country_code}) =>(
             <MenuItem sx={{ p: 0 }} onClick={() => selectLanguage(code)}>
             <Box sx={styles}>
-            <span className={`fi fi-${country_code}`} style={{ marginRight: 5 }}/> 
+            
+            <span className={`fi fi-${country_code == 'us' ? 'us' : 'br'}`} style={{ marginRight: 5 }}/> 
               {name}
             </Box>
             </MenuItem>

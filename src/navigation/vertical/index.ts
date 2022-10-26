@@ -7,6 +7,7 @@ import FormatLetterCase from 'mdi-material-ui/FormatLetterCase'
 import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
 import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
+import Domain from 'mdi-material-ui/Domain'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
 
@@ -30,6 +31,11 @@ const navigation = (): VerticalNavItemsType => {
     },
     {
       sectionTitle: 'Pages'
+    },
+    {
+      title: t('company'),
+      icon: Domain,
+      path: '/company',
     },
     {
       title: 'Login',
