@@ -13,6 +13,8 @@ import TablePagination from '@mui/material/TablePagination'
 
 import useTranslation from 'next-translate/useTranslation'
 
+import GetAll from 'src/api/company/CompanyService'
+
 interface Column {
   id: 'name' | 'abbreviation' | 'population' | 'size' | 'density'
   label: string
@@ -20,6 +22,7 @@ interface Column {
   align?: 'right'
   format?: (value: number) => string
 }
+const x = GetAll();
 
 const columns: readonly Column[] = [
   
