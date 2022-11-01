@@ -4,7 +4,9 @@
     "account_settings": "Account Settings",
     "name": "Name",
     "submit": "Submit",
+    "create": "Create",
 
+    "company" : "Company",
     "company_abbreviation": "Abbreviation",
     "company_name_example": "Microsoft",
     "company_email_example": "sales@microsoft.com",

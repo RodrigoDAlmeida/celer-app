@@ -5,6 +5,7 @@
     "name": "Nome",
     "submit": "Enviar",
     "create": "Incluir",
+    "rows-per-page": "Linhas por página",
     
     "company" : "Fornecedor",
     "company_abbreviation": "Sigla",
