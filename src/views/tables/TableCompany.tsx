@@ -12,12 +12,13 @@ import TableContainer from '@mui/material/TableContainer'
 import TablePagination from '@mui/material/TablePagination'
 
 import useTranslation from 'next-translate/useTranslation'
+import ContentLoader, { List } from "react-content-loader"
 
-import GetAll from 'src/api/company/CompanyService'
+import {getCompanies} from 'src/lib/CompanyService'
 const URL_API = "https://gbpjn8sulk.execute-api.us-east-1.amazonaws.com/prod/company"
 
 interface Column {
-  id: 'name' | 'abbreviation' | 'email' 
+  id: 'name' | 'abbreviation' | 'email'
   label: string
   minWidth?: number
   align?: 'right'
@@ -26,10 +27,10 @@ interface Column {
 
 
 const columns: readonly Column[] = [
-  
+
   { id: 'name', label: 'name', minWidth: 170 },
   { id: 'abbreviation', label: 'company_abbreviation', minWidth: 100 },
-  { id: 'email', label: 'Email'}
+  { id: 'email', label: 'Email' }
 ]
 
 interface Data {
@@ -61,14 +62,13 @@ const TableStickyHeader = () => {
   }
 
   const GetAll = async () => {
-    try{
+    try {
       setLoading(true)
-      const response = await fetch(URL_API)
-      const data = await response.json()
-      setData(data)
-    }catch(error){
+      const companies = await getCompanies()
+      setData(companies)
+    } catch (error) {
       console.log(error)
-    }finally {
+    } finally {
       setLoading(false)
     }
   }
@@ -77,7 +77,6 @@ const TableStickyHeader = () => {
     GetAll()
   }, [])
 
-  
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -91,23 +90,27 @@ const TableStickyHeader = () => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
-              return (
-                <TableRow hover role='checkbox' tabIndex={-1} key={row.abbreviation}>
-                  {columns.map(column => {
-                    const value = row[column.id]
+          {loading ? (<List />) :
+            (
+              <TableBody>
+                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                  return (
+                    <TableRow hover role='checkbox' tabIndex={-1} key={row.abbreviation}>
+                      {columns.map(column => {
+                        const value = row[column.id]
 
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    )
-                  })}
-                </TableRow>
-              )
-            })}
-          </TableBody>
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                          </TableCell>
+                        )
+                      })}
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+
+            )}
         </Table>
       </TableContainer>
     </Paper>

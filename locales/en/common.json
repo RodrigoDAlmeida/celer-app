@@ -5,6 +5,7 @@
     "name": "Name",
     "submit": "Submit",
     "create": "Create",
+    "rows-per-page": "Rows per page",
 
     "company" : "Company",
     "company_abbreviation": "Abbreviation",
