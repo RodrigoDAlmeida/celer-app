@@ -14,8 +14,8 @@ import TablePagination from '@mui/material/TablePagination'
 import useTranslation from 'next-translate/useTranslation'
 import ContentLoader, { List } from "react-content-loader"
 
-import {getCompanies} from 'src/lib/CompanyService'
-const URL_API = "https://gbpjn8sulk.execute-api.us-east-1.amazonaws.com/prod/company"
+import { getCompanies } from 'src/lib/CompanyService'
+
 
 interface Column {
   id: 'name' | 'abbreviation' | 'email'
@@ -30,7 +30,7 @@ const columns: readonly Column[] = [
 
   { id: 'name', label: 'name', minWidth: 170 },
   { id: 'abbreviation', label: 'company_abbreviation', minWidth: 100 },
-  { id: 'email', label: 'Email' }
+  { id: 'email', label: 'email' }
 ]
 
 interface Data {
@@ -80,18 +80,19 @@ const TableStickyHeader = () => {
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label='sticky table'>
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
-                  {t(column.label)}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          {loading ? (<List />) :
-            (
+
+        {loading ? (<List />) :
+          (
+            <Table stickyHeader aria-label='sticky table'>
+              <TableHead>
+                <TableRow>
+                  {columns.map(column => (
+                    <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
+                      {t(column.label)}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
               <TableBody>
                 {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
                   return (
@@ -109,9 +110,9 @@ const TableStickyHeader = () => {
                   )
                 })}
               </TableBody>
+            </Table>
+          )}
 
-            )}
-        </Table>
       </TableContainer>
     </Paper>
   )

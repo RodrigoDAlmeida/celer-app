@@ -1,6 +1,6 @@
 import memoize from "lodash.memoize";
 
-const URL_API = "https://gbpjn8sulk.execute-api.us-east-1.amazonaws.com/prod/company"
+const URL_API = "https://7kedjhmlme.execute-api.us-east-1.amazonaws.com/v1/company"
 var companies:any 
 
 async function fetchCompaniesData() {
@@ -15,8 +15,6 @@ async function createCompany(company:any){
         body: JSON.stringify(company)
     });
 
-    console.log(response)
-    console.log(response.json())
     return response.json()
 }
 
@@ -30,8 +28,8 @@ async function getAll(){
 const getCompanies = memoize(getAll)
 
 function addCompany(company:any){
-    createCompany(company)
-    companies.push(company)
+    const newCompany = createCompany(company)
+    companies.push(newCompany)
 }
 
 export {getCompanies, addCompany};

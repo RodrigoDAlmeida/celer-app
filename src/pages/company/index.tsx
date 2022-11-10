@@ -1,5 +1,6 @@
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
+import { useRef } from 'react'
 
 // ** Styled Component
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
@@ -17,13 +18,14 @@ import CompanyForm from 'src/views/form-registration/CompanyForm'
 import TableCompany from 'src/views/tables/TableCompany'
 
 const Company = () => {
+  const refreshTrigger = useRef();
   return (
     
     <DatePickerWrapper>
       
       <Grid container spacing={6}>
         <Grid item xs={12} >
-        <CompanyForm/>
+        <CompanyForm {...refreshTrigger} ></CompanyForm> 
         </Grid>
         <Grid item xs={12} >
         <TableCompany/>

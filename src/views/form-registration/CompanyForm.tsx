@@ -31,7 +31,7 @@ const CustomInput = forwardRef((props, ref) => {
 
 
 
-const CompanyForm = () => {
+const CompanyForm = (refreshTrigger:boolean) => {
 
   
   const { t } = useTranslation('common');

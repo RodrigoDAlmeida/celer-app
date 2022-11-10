@@ -33,12 +33,12 @@ const languages = [
   {
     code: 'en',
     name: 'English',
-    country_code: 'us'
+    country_code: 'us',
   },
   {
     code: 'pt',
     name: 'Português',
-    country_code: 'br'
+    country_code: 'br',
   }
 
 ]
@@ -84,7 +84,7 @@ const languages = [
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         {languages.map(({code, name, country_code}) =>(
-            <MenuItem sx={{ p: 0 }} onClick={() => selectLanguage(code)}>
+            <MenuItem key={code} sx={{ p: 0 }} onClick={() => selectLanguage(code)}>
             <Box sx={styles}>
             
             <span className={`fi fi-${country_code == 'us' ? 'us' : 'br'}`} style={{ marginRight: 5 }}/> 
