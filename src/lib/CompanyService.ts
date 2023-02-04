@@ -1,12 +1,13 @@
 import memoize from "lodash.memoize";
 
 const URL_API = "https://7kedjhmlme.execute-api.us-east-1.amazonaws.com/v1/company"
-var companies:any 
+let companies:any 
 
-async function fetchCompaniesData() {
+async function fetchCompaniesData(){
     const response = await fetch(URL_API)
-    const data = await response.json()
-    return data
+    
+return await response.json()
+    
 }
 
 async function createCompany(company:any){
@@ -27,9 +28,11 @@ async function getAll(){
 
 const getCompanies = memoize(getAll)
 
-function addCompany(company:any){
-    const newCompany = createCompany(company)
+
+async function addCompany(company:any){
+    const newCompany = await createCompany(company)
     companies.push(newCompany)
+    console.log(companies)
 }
 
 export {getCompanies, addCompany};

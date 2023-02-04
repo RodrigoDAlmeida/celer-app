@@ -1,5 +1,5 @@
 // ** React Imports
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -16,34 +16,16 @@ import ChevronUp from 'mdi-material-ui/ChevronUp'
 import ChevronDown from 'mdi-material-ui/ChevronDown'
 import Collapse from '@mui/material/Collapse'
 
-import {addCompany} from 'src/lib/CompanyService'
+//import {addCompany} from 'src/lib/CompanyService'
 
-interface State {
-  password: string
-  password2: string
-  showPassword: boolean
-  showPassword2: boolean
-}
+import { useQuery } from 'react-query'
+import { getCompanies, addCompany } from 'src/lib/CompanyService'
 
-const CustomInput = forwardRef((props, ref) => {
-  return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
-})
+const CompanyForm = () => {
 
-
-
-const CompanyForm = (refreshTrigger:boolean) => {
-
-  
+  const { data } = useQuery('company', getCompanies)
   const { t } = useTranslation('common');
-  // ** States
-  const [language, setLanguage] = useState<string[]>([])
-  const [date, setDate] = useState<Date | null | undefined>(null)
-  const [values, setValues] = useState<State>({
-    password: '',
-    password2: '',
-    showPassword: false,
-    showPassword2: false
-  })
+  const [isLoading, setLoading] = useState<boolean>(false)
 
   const [collapse, setCollapse] = useState<boolean>(true)
 
@@ -52,16 +34,17 @@ const CompanyForm = (refreshTrigger:boolean) => {
   }
   const handleSubmit = async (event:any) => {
     event.preventDefault()
-    const data = {
+    setLoading(true)
+    const newCompany = {
       name: event.target.name.value,
       abbreviation: event.target.abbreviation.value,
       email: event.target.email.value
     }
 
-    addCompany(data);
+
+    await addCompany(newCompany)
+    setLoading(false)
   }
-
-
 
 
   return (
@@ -90,8 +73,8 @@ const CompanyForm = (refreshTrigger:boolean) => {
           </Grid>
         </CardContent>
         <CardActions>
-          <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
-            {t('create')}
+          <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained' disabled={isLoading}>
+            {isLoading ? "..." : t('create')}
           </Button>
         </CardActions>
         </Collapse>

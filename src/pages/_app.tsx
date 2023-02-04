@@ -34,6 +34,8 @@ import '../../styles/globals.css'
 //Interlalization
 import useTranslation from 'next-translate/useTranslation'
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
 // ** Extend App Props with Emotion
 type ExtendedAppProps = AppProps & {
   Component: NextPage
@@ -62,8 +64,13 @@ const App = (props: ExtendedAppProps) => {
 
   // Variables
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
+  
+
+  const queryClient = new QueryClient();
 
   return (
+    <QueryClientProvider client={queryClient}> 
+
     <CacheProvider value={emotionCache}>
       <Head>
         <title>{`${themeConfig.templateName} - ` + t('celer-description')}</title>
@@ -83,6 +90,7 @@ const App = (props: ExtendedAppProps) => {
         </SettingsConsumer>
       </SettingsProvider>
     </CacheProvider>
+    </QueryClientProvider>
   )
 }
 
